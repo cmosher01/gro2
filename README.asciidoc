@@ -1,0 +1,8 @@
+Genealogy Research Organizer 2
+==============================
+Christopher A. Mosher <chris@mosher.mine.nu>
+
+Genealogy Research Organizer 2 is a cross-platform (Java) free/libre, open-source
+application to manage your family tree information.
+
+It is a port of the original Genealogy Research Organizer application to Java.
