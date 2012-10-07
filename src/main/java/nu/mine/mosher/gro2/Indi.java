@@ -1,4 +1,4 @@
-package to.go.gro.groapplet;
+package nu.mine.mosher.gro2;
 
 import java.awt.Color;
 import java.awt.Graphics;
