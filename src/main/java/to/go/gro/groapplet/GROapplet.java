@@ -1,4 +1,5 @@
 package to.go.gro.groapplet;
+
 import java.awt.HeadlessException;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -36,7 +37,8 @@ public class GROapplet extends JApplet
     /**
      * 
      */
-    public void init()
+    @Override
+	public void init()
     {
         try
         {
@@ -150,32 +152,32 @@ public class GROapplet extends JApplet
 
         readFrom(streamTree);
 
-        JScrollPane scr = new JScrollPane(fc, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        JScrollPane scr = new JScrollPane(this.fc, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         getContentPane().add(scr);
     }
 
     protected void readFrom(InputStream instream) throws IOException
     {
-        BufferedReader br = new BufferedReader(new InputStreamReader(instream, "UTF-8"));
-
-        Map<String,Indi> mapIdToIndi = new HashMap<String,Indi>();
+//        BufferedReader br = new BufferedReader(new InputStreamReader(instream, "UTF-8"));
+//
+//        Map<String,Indi> mapIdToIndi = new HashMap<>();
 
         IndiSet indis = new IndiSet();
 
-        String sMaxWidth = br.readLine();
-        double dMaxWidth = Double.parseDouble(sMaxWidth);
-        int cMaxWidth = (int)Math.round(dMaxWidth);
-        indis.setMaxWidth(cMaxWidth);
+//        String sMaxWidth = br.readLine();
+//        double dMaxWidth = Double.parseDouble(sMaxWidth);
+//        int cMaxWidth = (int)Math.round(dMaxWidth);
+//        indis.setMaxWidth(cMaxWidth);
 
-        String scIndi = br.readLine();
-        int cIndi = Integer.parseInt(scIndi);
+//        String scIndi = br.readLine();
+//        int cIndi = Integer.parseInt(scIndi);
 //        for (int i = 0; i < cIndi; ++i)
 //        {
 //            String slineIndi = br.readLine();
 //            StringFieldizer sf = new StringFieldizer(slineIndi);
 //            Iter it = sf.iterator();
 //            String id = it.next();
-//			int nid = Integer.parseInt(id.substring(1));
+//            int nid = Integer.parseInt(id.substring(1));
 //            String name = it.next();
 //            String birth = it.next();
 //            String death = it.next();
@@ -191,8 +193,8 @@ public class GROapplet extends JApplet
 //        }
 
         FamiSet famis = new FamiSet();
-        String scFami = br.readLine();
-        int cFami = Integer.parseInt(scFami);
+//        String scFami = br.readLine();
+//        int cFami = Integer.parseInt(scFami);
 //        for (int i = 0; i < cFami; ++i)
 //        {
 //            String slineIndi = br.readLine();
@@ -213,7 +215,7 @@ public class GROapplet extends JApplet
 //            famis.add(fami);
 //        }
 
-        fc = new FamilyChart(this,indis,famis);
+        this.fc = new FamilyChart(this,indis,famis);
     }
 
 //    public static void main(String[] args)

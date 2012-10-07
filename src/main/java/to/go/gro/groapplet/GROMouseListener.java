@@ -14,45 +14,48 @@ public class GROMouseListener extends MouseInputAdapter
 		this.fc = fc;
 	}
 
-    public void mousePressed(MouseEvent evt)
-    {
-		mLastIndi = fc.hitIndi(evt.getPoint());
-		if (mLastIndi != null)
+	@Override
+	public void mousePressed(MouseEvent evt)
+	{
+		this.mLastIndi = this.fc.hitIndi(evt.getPoint());
+		if (this.mLastIndi != null)
 		{
-			mLastIndi.hit(true);
-			fc.repaint();
+			this.mLastIndi.hit(true);
+			this.fc.repaint();
 		}
-        super.mousePressed(evt);
-    }
+		super.mousePressed(evt);
+	}
 
-    public void mouseReleased(MouseEvent evt)
-    {
-    	if (mLastIndi != null)
-    	{
-    		if (mLastIndi.isHit())
-    		{
-				mLastIndi.hit(false);
-				fc.repaint();
-				fc.gotoIndi(mLastIndi);
-    		}
-			mLastIndi = null;
-    	}
-        super.mouseReleased(evt);
-    }
+	@Override
+	public void mouseReleased(MouseEvent evt)
+	{
+		if (this.mLastIndi != null)
+		{
+			if (this.mLastIndi.isHit())
+			{
+				this.mLastIndi.hit(false);
+				this.fc.repaint();
+				this.fc.gotoIndi(this.mLastIndi);
+			}
+			this.mLastIndi = null;
+		}
+		super.mouseReleased(evt);
+	}
 
-    public void mouseDragged(MouseEvent evt)
-    {
-		Indi indi = fc.hitIndi(evt.getPoint());
-		if (indi != mLastIndi && mLastIndi != null && mLastIndi.isHit())
+	@Override
+	public void mouseDragged(MouseEvent evt)
+	{
+		Indi indi = this.fc.hitIndi(evt.getPoint());
+		if (indi != this.mLastIndi && this.mLastIndi != null && this.mLastIndi.isHit())
 		{
-			mLastIndi.hit(false);
-			fc.repaint();
+			this.mLastIndi.hit(false);
+			this.fc.repaint();
 		}
-		else if (indi == mLastIndi && mLastIndi != null && !mLastIndi.isHit())
+		else if (indi == this.mLastIndi && this.mLastIndi != null && !this.mLastIndi.isHit())
 		{
-			mLastIndi.hit(true);
-			fc.repaint();
+			this.mLastIndi.hit(true);
+			this.fc.repaint();
 		}
-        super.mouseDragged(evt);
-    }
+		super.mouseDragged(evt);
+	}
 }

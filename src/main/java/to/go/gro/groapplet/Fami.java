@@ -1,4 +1,5 @@
 package to.go.gro.groapplet;
+
 import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.Rectangle;
@@ -18,7 +19,7 @@ public class Fami
 
     private Indi husb;
     private Indi wife;
-    private List rChild = new ArrayList(); // <Indi>
+    private List<Indi> rChild = new ArrayList<>();
 
     private Line2D parentBar1;
     private Line2D parentBar2;
@@ -36,47 +37,47 @@ public class Fami
 
     public void setHusb(Indi indi)
     {
-        husb = indi;
+        this.husb = indi;
     }
 
     public void setWife(Indi indi)
     {
-        wife = indi;
+        this.wife = indi;
     }
 
     public void addChild(Indi indi)
     {
-        rChild.add(indi);
+        this.rChild.add(indi);
     }
 
-    public void calc(Graphics g)
+    public void calc(@SuppressWarnings("unused") Graphics g)
     {
-        if (husb == null && wife == null && rChild.size()==0)
+        if (this.husb == null && this.wife == null && this.rChild.size()==0)
             return;
 
         Rectangle2D rect1;
         Rectangle2D rect2;
-        if (husb == null && wife == null)
+        if (this.husb == null && this.wife == null)
         {
             rect1 = new Rectangle2D.Double();
             rect2 = new Rectangle2D.Double();
         }
-        else if (husb == null)
+        else if (this.husb == null)
         {
-            rect2 = wife.getBounds();
-            rect1 = wife.getBounds();
+            rect2 = this.wife.getBounds();
+            rect1 = this.wife.getBounds();
             rect1.setRect(rect1.getMinX()-MARRIAGE_SPACING,rect1.getY(),0,rect1.getHeight());
         }
-        else if (wife == null)
+        else if (this.wife == null)
         {
-            rect1 = husb.getBounds();
-            rect2 = husb.getBounds();
+            rect1 = this.husb.getBounds();
+            rect2 = this.husb.getBounds();
             rect2.setRect(rect2.getMaxX()+MARRIAGE_SPACING,rect2.getY(),0,rect2.getHeight());
         }
         else
         {
-            rect1 = husb.getBounds();
-            rect2 = wife.getBounds();
+            rect1 = this.husb.getBounds();
+            rect2 = this.wife.getBounds();
         }
 
         boolean bHusbandOnRight = (rect1.getX() > rect2.getX());
@@ -111,20 +112,20 @@ public class Fami
 
         if (pt1.getX()>0 || pt1.getY()>0 || pt2.getX()>0 || pt2.getY()>0)
         {
-            parentBar1 = new Line2D.Double(pt1.getX(),pt1.getY()-BAR_HEIGHT/2,pt2.getX(),pt2.getY()-BAR_HEIGHT/2);
-            parentBar2 = new Line2D.Double(pt1.getX(),pt1.getY()+BAR_HEIGHT/2,pt2.getX(),pt2.getY()+BAR_HEIGHT/2);
+            this.parentBar1 = new Line2D.Double(pt1.getX(),pt1.getY()-BAR_HEIGHT/2,pt2.getX(),pt2.getY()-BAR_HEIGHT/2);
+            this.parentBar2 = new Line2D.Double(pt1.getX(),pt1.getY()+BAR_HEIGHT/2,pt2.getX(),pt2.getY()+BAR_HEIGHT/2);
         }
 
         double nTop = Double.MAX_VALUE;
         double nBottom = Double.MIN_VALUE;
         double nLeft = Double.MAX_VALUE;
         double nRight = Double.MIN_VALUE;
-        if (!rChild.isEmpty())
+        if (!this.rChild.isEmpty())
         {
-            Point2D[] rp = new Point2D.Double[rChild.size()];
+            Point2D[] rp = new Point2D.Double[this.rChild.size()];
             for (int i = 0; i < rp.length; i++)
             {
-                Rectangle2D rect = ((Indi)rChild.get(i)).getBounds();
+                Rectangle2D rect = this.rChild.get(i).getBounds();
 
                 double x = rect.getCenterX();
                 double y = rect.getY();
@@ -141,25 +142,25 @@ public class Fami
                     nBottom = y;
             }
             nTop -= CHILD_HEIGHT;
-            childBar = new Line2D.Double(nLeft,nTop,nRight,nTop);
+            this.childBar = new Line2D.Double(nLeft,nTop,nRight,nTop);
 
-            rChildBar = new Line2D.Double[rp.length];
-            for (int i = 0; i < rChildBar.length; i++)
+            this.rChildBar = new Line2D.Double[rp.length];
+            for (int i = 0; i < this.rChildBar.length; i++)
             {
-                rChildBar[i] = new Line2D.Double(rp[i].getX(),rp[i].getY(),rp[i].getX(),nTop);
+                this.rChildBar[i] = new Line2D.Double(rp[i].getX(),rp[i].getY(),rp[i].getX(),nTop);
             }
 
             if (pt1.getX()>0 || pt1.getY()>0 || pt2.getX()>0 || pt2.getY()>0)
             {
                 if (nLeft<ptP.getX() && ptP.getX()<nRight)
                 {
-                    descentBar1 = new Line2D.Double(ptP.getX(),ptP.getY(),ptP.getX(),nTop);
+                    this.descentBar1 = new Line2D.Double(ptP.getX(),ptP.getY(),ptP.getX(),nTop);
                 }
                 else
                 {
-                    descentBar1 = new Line2D.Double(ptP.getX(),ptP.getY(),ptP.getX(),nTop-CHILD_HEIGHT);
-                    descentBar2 = new Line2D.Double(ptP.getX(),nTop-CHILD_HEIGHT,(nRight+nLeft)/2,nTop-CHILD_HEIGHT);
-                    descentBar3 = new Line2D.Double((nRight+nLeft)/2,nTop-CHILD_HEIGHT,(nRight+nLeft)/2,nTop);
+                    this.descentBar1 = new Line2D.Double(ptP.getX(),ptP.getY(),ptP.getX(),nTop-CHILD_HEIGHT);
+                    this.descentBar2 = new Line2D.Double(ptP.getX(),nTop-CHILD_HEIGHT,(nRight+nLeft)/2,nTop-CHILD_HEIGHT);
+                    this.descentBar3 = new Line2D.Double((nRight+nLeft)/2,nTop-CHILD_HEIGHT,(nRight+nLeft)/2,nTop);
                 }
             }
         }
@@ -167,24 +168,24 @@ public class Fami
 
 
         Polygon pg = new Polygon();
-        if (parentBar1 != null)
+        if (this.parentBar1 != null)
         {
-            pg.addPoint((int)parentBar1.getX1(),(int)parentBar1.getY1());
-            pg.addPoint((int)parentBar1.getX2(),(int)parentBar1.getY2());
-            pg.addPoint((int)parentBar2.getX2(),(int)parentBar2.getY2());
-            pg.addPoint((int)parentBar2.getX1(),(int)parentBar2.getY1());
+            pg.addPoint((int)this.parentBar1.getX1(),(int)this.parentBar1.getY1());
+            pg.addPoint((int)this.parentBar1.getX2(),(int)this.parentBar1.getY2());
+            pg.addPoint((int)this.parentBar2.getX2(),(int)this.parentBar2.getY2());
+            pg.addPoint((int)this.parentBar2.getX1(),(int)this.parentBar2.getY1());
         }
-        parentBounds = pg;
+        this.parentBounds = pg;
 
         Line2D ln = new Line2D.Double();
-        if (descentBar1 != null)
-            ln.setLine(descentBar1);
-        descentLine = ln;
+        if (this.descentBar1 != null)
+            ln.setLine(this.descentBar1);
+        this.descentLine = ln;
 
         Rectangle rect = new Rectangle();
-        if (descentBar1 != null)
+        if (this.descentBar1 != null)
         {
-            double y = descentBar1.getY2();
+            double y = this.descentBar1.getY2();
             double x = Math.min(nLeft,ptP.getX());
             double w = Math.max(nRight,ptP.getX())-x+1;
             if (w < 1)
@@ -194,23 +195,23 @@ public class Fami
                 h = 1;
             rect.setRect(x,y,w,h);
         }
-        childBounds = rect;
+        this.childBounds = rect;
     }
 
     public void paint(Graphics g)
     {
-        drawLine(g,parentBar1);
-        drawLine(g,parentBar2);
-        drawLine(g,descentBar1);
-        drawLine(g,descentBar2);
-        drawLine(g,descentBar3);
-        drawLine(g,childBar);
-        if (rChildBar != null)
-            for (int i = 0; i < rChildBar.length; i++)
-                drawLine(g,rChildBar[i]);
+        drawLine(g,this.parentBar1);
+        drawLine(g,this.parentBar2);
+        drawLine(g,this.descentBar1);
+        drawLine(g,this.descentBar2);
+        drawLine(g,this.descentBar3);
+        drawLine(g,this.childBar);
+        if (this.rChildBar != null)
+            for (int i = 0; i < this.rChildBar.length; i++)
+                drawLine(g,this.rChildBar[i]);
     }
 
-    protected void drawLine(Graphics g, Line2D line)
+    protected static void drawLine(Graphics g, Line2D line)
     {
         if (line == null)
             return;
@@ -220,13 +221,13 @@ public class Fami
 
     public boolean sect(Rectangle2D clip)
     {
-        if (childBounds.intersects(clip))
+        if (this.childBounds.intersects(clip))
             return true;
 
-        if (parentBounds.intersects(clip))
+        if (this.parentBounds.intersects(clip))
             return true;
 
-        if (descentLine.intersects(clip))
+        if (this.descentLine.intersects(clip))
             return true;
 
         return false;
