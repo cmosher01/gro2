@@ -14,8 +14,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
-import nu.mine.mosher.core.StringFieldizer;
-import nu.mine.mosher.core.StringFieldizer.Iter;
 
 /**
  * TODO
@@ -171,49 +169,49 @@ public class GROapplet extends JApplet
 
         String scIndi = br.readLine();
         int cIndi = Integer.parseInt(scIndi);
-        for (int i = 0; i < cIndi; ++i)
-        {
-            String slineIndi = br.readLine();
-            StringFieldizer sf = new StringFieldizer(slineIndi);
-            Iter it = sf.iterator();
-            String id = it.next();
-			int nid = Integer.parseInt(id.substring(1));
-            String name = it.next();
-            String birth = it.next();
-            String death = it.next();
-            String sx = it.next();
-            double dx = Double.parseDouble(sx);
-            int x = (int)Math.round(dx);
-            String sy = it.next();
-            double dy = Double.parseDouble(sy);
-            int y = (int)Math.round(dy);
-            Indi indi = new Indi(x, y, nid, name, birth, death);
-            indis.add(indi);
-            mapIdToIndi.put(id, indi);
-        }
+//        for (int i = 0; i < cIndi; ++i)
+//        {
+//            String slineIndi = br.readLine();
+//            StringFieldizer sf = new StringFieldizer(slineIndi);
+//            Iter it = sf.iterator();
+//            String id = it.next();
+//			int nid = Integer.parseInt(id.substring(1));
+//            String name = it.next();
+//            String birth = it.next();
+//            String death = it.next();
+//            String sx = it.next();
+//            double dx = Double.parseDouble(sx);
+//            int x = (int)Math.round(dx);
+//            String sy = it.next();
+//            double dy = Double.parseDouble(sy);
+//            int y = (int)Math.round(dy);
+//            Indi indi = new Indi(x, y, nid, name, birth, death);
+//            indis.add(indi);
+//            mapIdToIndi.put(id, indi);
+//        }
 
         FamiSet famis = new FamiSet();
         String scFami = br.readLine();
         int cFami = Integer.parseInt(scFami);
-        for (int i = 0; i < cFami; ++i)
-        {
-            String slineIndi = br.readLine();
-            StringFieldizer sf = new StringFieldizer(slineIndi);
-            Iter it = sf.iterator();
-            Fami fami = new Fami();
-            String husb = it.next();
-            fami.setHusb(mapIdToIndi.get(husb));
-            String wife = it.next();
-            fami.setWife(mapIdToIndi.get(wife));
-            String sc = it.next();
-            int c = Integer.parseInt(sc);
-            for (int ic = 0; ic < c; ++ic)
-            {
-                String chil = it.next();
-                fami.addChild(mapIdToIndi.get(chil));
-            }
-            famis.add(fami);
-        }
+//        for (int i = 0; i < cFami; ++i)
+//        {
+//            String slineIndi = br.readLine();
+//            StringFieldizer sf = new StringFieldizer(slineIndi);
+//            Iter it = sf.iterator();
+//            Fami fami = new Fami();
+//            String husb = it.next();
+//            fami.setHusb(mapIdToIndi.get(husb));
+//            String wife = it.next();
+//            fami.setWife(mapIdToIndi.get(wife));
+//            String sc = it.next();
+//            int c = Integer.parseInt(sc);
+//            for (int ic = 0; ic < c; ++ic)
+//            {
+//                String chil = it.next();
+//                fami.addChild(mapIdToIndi.get(chil));
+//            }
+//            famis.add(fami);
+//        }
 
         fc = new FamilyChart(this,indis,famis);
     }

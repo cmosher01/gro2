@@ -9,8 +9,6 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
 
-import nu.mine.mosher.core.Util;
-
 public class Fami
 {
     private static final int BAR_HEIGHT = 4;
@@ -53,7 +51,6 @@ public class Fami
 
     public void calc(Graphics g)
     {
-        Util.unused(g);
         if (husb == null && wife == null && rChild.size()==0)
             return;
 
